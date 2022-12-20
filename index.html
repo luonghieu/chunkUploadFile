@@ -48,9 +48,6 @@
 
 	</div>
 	<div id="footer">
-		This app was created with <a href="https://api.video">api.video</a>.<br/>
-		Get the <a href="https://github.com/dougsillars/blobUpload">sample code</a>, and read about <a href="https://a.video/works/upload-a-video">how we built the demo.</a><br/>
-		More sample apps can be found at <a href="https://a.video">a.video</a>.
 
 	</div>
 	
@@ -58,16 +55,17 @@
 	<script>
 	  const input = document.querySelector('#video-file');
 	  //changed to sandbox, becuase we cannot have nice things
-	  const url ="https://ws.api.video/upload?token=to5PoOjCz98FdLGnsrFflnYo";
+	  const url ="https://ws.api.video/upload?token=to36ZQpJf60SjZBC5Vwf3JUb";
 	  var chunkCounter =0;
 	  //break into 1 MB chunks for demo purposes
-	  const chunkSize = 1000000;  
+	  const chunkSize = 6000000;
 	  var videoId = "";
 	  var playerUrl = "";
 
 	  
 	  input.addEventListener('change', () => {
 	    const file = input.files[0];
+		console.log(file, URL.createObjectURL(file))
 		const filename = input.files[0].name;
 	    var numberofChunks = Math.ceil(file.size/chunkSize);
 		document.getElementById("video-information").innerHTML = "There will be " + numberofChunks + " chunks uploaded."
@@ -77,9 +75,7 @@
 		var chunkEnd = start + chunkSize;
 		//upload the first chunk to get the videoId
 		createChunk(videoId, start);
-		
-		
-		
+
 		function createChunk(videoId, start, end){
 			chunkCounter++;
 			console.log("created chunk: ", chunkCounter);
@@ -87,7 +83,7 @@
 			const chunk = file.slice(start, chunkEnd);
 			console.log("i created a chunk of video" + start + "-" + chunkEnd + "minus 1	");
   		  	const chunkForm = new FormData();
-			if(videoId.length >0){
+			if(!!videoId){
 				//we have a videoId
 				chunkForm.append('videoId', videoId);
 				console.log("added videoId");	

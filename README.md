@@ -4,7 +4,7 @@
 
 [![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
 
-![](https://github.com/apivideo/API_OAS_file/blob/master/apivideo_banner.png)
+![](https://github.com/apivideo/.github/blob/main/assets/apivideo_banner.png)
 
 <h1 align="center">api.video upload a videoE</h1>
 
@@ -30,3 +30,6 @@ All you need is a delegated upload token from [api.video](https://api.video). Re
 ## Test it out!
 
 [upload.a.video](https://upload.a.video)
+
+Server stores all images as BLOBs. To upload an image, client encodes it into Base64 string, then sends it to the server. Server decodes image BACK into binary format and stores it as BLOB in the database. When client requests an image, server re-encodes the image as Base64 string and sends it to the client, who then decodes it back to binary for display.
+Server stores all images as Base64 strings. To upload an image, client encodes it into Base64 string and sends it to the server. Server does no encoding or decoding, but simply stores the string in the database. When client requests an image, the Base64 string is returned to the client, who then decodes it for display.
